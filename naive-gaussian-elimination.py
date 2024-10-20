@@ -20,3 +20,8 @@ def gaussian_elimination(matrix, b):
         x[i] = A[i][n] - np.dot(A[i][i+1:n], x[i+1:n])
     
     return x
+
+matrix_2x2 = np.array([[2, 1], [5, 7]])
+b_2x2 = np.array([11, 13])
+solution_2x2 = gaussian_elimination(matrix_2x2, b_2x2)
+print("Solution for 2x2 matrix:", solution_2x2) 
