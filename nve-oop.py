@@ -30,3 +30,17 @@ b_2x2 = np.array([11, 13])
 solver_2x2 = GaussianElimination(matrix_2x2, b_2x2)
 solution_2x2 = solver_2x2.solve()
 print("Solution for 2x2 matrix:", solution_2x2)
+
+#3x3 Matrix
+matrix_3x3 = np.array([[1, 2, -1], [2, 3, 3], [3, -1, 2]])
+b_3x3 = np.array([8, 13, 1])
+solver_3x3 = GaussianElimination(matrix_3x3, b_3x3)
+solution_3x3 = solver_3x3.solve()
+print("Solution for 3x3 matrix:", solution_3x3)
+
+#4x4 Matrix
+matrix_4x4 = np.array([[1, 1, 1, 1], [0, 2, 5, 1], [2, 5, -1, 0], [1, -1, 1, 1]])
+b_4x4 = np.array([10, 12, 6, 4])
+solver_4x4 = GaussianElimination(matrix_4x4, b_4x4)
+solution_4x4 = solver_4x4.solve()
+print("Solution for 4x4 matrix:", solution_4x4)
