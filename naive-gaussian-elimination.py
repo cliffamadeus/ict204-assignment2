@@ -5,12 +5,24 @@ def gaussian_elimination(matrix, b):
     
     # Augment the matrix with the vector b
     A = np.hstack([matrix, b.reshape(-1, 1)])
-    
+
     # Forward elimination
     for i in range(n):
-        # Make the diagonal contain all 1s
+        # Find the maximum element in the current column for pivoting
+        max_row = np.argmax(np.abs(A[i:n, i])) + i
+        
+        # Check if the pivot element is zero
+        if A[max_row, i] == 0:
+            raise ValueError("Matrix is singular and cannot be solved.")
+        
+        # Swap the current row with the max_row if needed
+        if max_row != i:
+            A[[i, max_row]] = A[[max_row, i]]
+        
+        # Normalize the pivot row
         A[i] = A[i] / A[i][i]
         
+        # Eliminate the entries below the pivot
         for j in range(i + 1, n):
             A[j] = A[j] - A[i] * A[j][i]
 
