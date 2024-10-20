@@ -9,15 +9,28 @@ class GaussianElimination:
 
     def forward_elimination(self):
         for i in range(self.n):
+            # Find the maximum element in the current column for pivoting
+            max_row = np.argmax(np.abs(self.augmented_matrix[i:self.n, i])) + i
+            
+            # Check if the pivot element is zero
+            if self.augmented_matrix[max_row, i] == 0:
+                raise ValueError("Matrix is singular and cannot be solved.")
+            
+            # Swap the current row with the max_row if needed
+            if max_row != i:
+                self.augmented_matrix[[i, max_row]] = self.augmented_matrix[[max_row, i]]
+            
+            # Normalize the pivot row
             self.augmented_matrix[i] = self.augmented_matrix[i] / self.augmented_matrix[i][i]
-
+            
+            # Eliminate the entries below the pivot
             for j in range(i + 1, self.n):
                 self.augmented_matrix[j] -= self.augmented_matrix[i] * self.augmented_matrix[j][i]
 
     def back_substitution(self):
         x = np.zeros(self.n)
         for i in range(self.n - 1, -1, -1):
-            x[i] = self.augmented_matrix[i][self.n] - np.dot(self.augmented_matrix[i][i+1:self.n], x[i+1:self.n])
+            x[i] = self.augmented_matrix[i][self.n] - np.dot(self.augmented_matrix[i][i + 1:self.n], x[i + 1:self.n])
         return x
 
     def solve(self):
